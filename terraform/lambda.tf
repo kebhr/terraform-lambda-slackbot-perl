@@ -2,7 +2,7 @@ variable "slack_token" {}
 
 data "archive_file" "slackbot" {
   type        = "zip"
-  source_file = "../lambda/slackbot/src/main.pl"
+  source_dir = "../lambda/slackbot/src/"
   output_path = "../lambda/slackbot/out/slackbot.zip"
 }
 
