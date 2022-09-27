@@ -8,7 +8,7 @@ data "archive_file" "slackbot" {
 
 resource "null_resource" "make_module_layer" {
   triggers = {
-    source_code_hash = filebase64sha256("../module_layer/make_module_layer.sh")
+    source_code_hash = filesha256("../module_layer/make_module_layer.sh")
   }
   provisioner "local-exec" {
     working_dir = "../module_layer"
@@ -19,7 +19,7 @@ resource "null_resource" "make_module_layer" {
 data "archive_file" "module_layer" {
   type        = "zip"
   source_dir  = "../module_layer/workspace/"
-  output_path = "../module_layer/out/module-layer-${filebase64sha256("../module_layer/make_module_layer.sh")}.zip"
+  output_path = "../module_layer/out/module-layer-${filesha256("../module_layer/make_module_layer.sh")}.zip"
 }
 
 resource "aws_lambda_layer_version" "module_layer" {
